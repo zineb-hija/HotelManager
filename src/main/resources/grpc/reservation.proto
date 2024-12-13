@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+option java_package = "org.example.hotelmanage";
+option java_multiple_files = true;
+
+message Reservation {
+  int64 id = 1;
+  string clientName = 2;
+  string checkInDate = 3;
+  string checkOutDate = 4;
+  string roomPreference = 5;
+}
+
+message GetAllReservationsRequest {}
+
+message GetAllReservationsResponse {
+  repeated Reservation reservations = 1;
+}
+
+message GetReservationByIdRequest {
+  int64 id = 1;
+}
+
+message GetReservationByIdResponse {
+  Reservation reservation = 1;
+}
+
+message SaveReservationRequest {
+  Reservation reservation = 1;
+}
+
+message SaveReservationResponse {
+  Reservation reservation = 1;
+}
+
+message DeleteReservationRequest {
+  int64 id = 1;
+}
+
+message DeleteReservationResponse {
+  bool success = 1;
+}
+
+message UpdateReservationRequest {
+  int64 id = 1;
+  Reservation reservation = 2;
+}
+
+message UpdateReservationResponse {
+  Reservation reservation = 1;
+}
+
+
+
+
+service ReservationService {
+  rpc getAllReservations(GetAllReservationsRequest) returns (GetAllReservationsResponse);
+  rpc getReservationById(GetReservationByIdRequest) returns (GetReservationByIdResponse);
+  rpc saveReservation(SaveReservationRequest) returns (Reservation);
+  rpc deleteReservation(DeleteReservationRequest) returns (DeleteReservationResponse);
+  rpc updateReservation(UpdateReservationRequest) returns (UpdateReservationResponse);
+}

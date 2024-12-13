@@ -1,0 +1,36 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+    allReservations: [Reservation]
+    reservationById(id: ID!): Reservation
+}
+
+type Mutation {
+    saveReservation(reservation:ReservationRequest):Reservation
+    deleteReservation(id: ID!): String
+    updateReservation(
+        id: ID!
+        clientName: String
+        checkInDate: String
+        checkOutDate: String
+        roomPreference: String
+    ): Reservation!
+}
+
+type Reservation {
+    id: ID!
+    clientName: String!
+    checkInDate: String!
+    checkOutDate: String!
+    roomPreference: String
+}
+
+input ReservationRequest {
+    clientName: String!
+    checkInDate: String!
+    checkOutDate: String!
+    roomPreference: String
+}
